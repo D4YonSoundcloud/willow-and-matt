@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Willow + Matt</title>
+    <meta name="description" content="The HTML5 Herald">
+    <meta name="author" content="SitePoint">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Russo+One&family=Work+Sans:wght@700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body{
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: 10000vh;
+        width: 100vw;
+        display: flex;
+        flex-flow: column;
+        justify-content: start;
+        align-items: start;
+        background-color: #93E9BE;
+    }
+</style>
+<body>
+<div class="title">
+    <h1>Willow + Matt</h1>
+    <h2>2-20-20</h2>
+</div>
+<div id="photos" class="main-photos">
+    <div class="photos-container" v-for="(photo,index) in photoArray">
+        <div class="photo-div">
+            <img :alt="index" :src="photo" class="photo">
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+<script>
+	const appMainScene = new Vue({
+		el: '#photos',
+		data: {
+			photoArray:['./photos/picture1.jpeg','./photos/picture2.jpeg','./photos/picture3.jpeg','./photos/picture4.jpeg',
+                        './photos/picture9.jpeg','./photos/picture6.jpeg','./photos/picture7.jpeg','./photos/picture8.jpeg',
+                        './photos/picture5.jpeg', './photos/picture10.jpeg', './photos/picture11.jpeg', './photos/picture12.jpeg']
+		},
+		methods:{
+
+		},
+		mounted(){
+		}
+	})
+</script>
+</body>
+</html>
