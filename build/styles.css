@@ -25,28 +25,43 @@ h1,h2{
 }
 
 .photos-container{
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-flow: column;
     background-color: #84e7b5;
+    transition: 1s ease;
+    transform: scale(1);
 }
 
 .photo-div{
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 1.25%;
     padding: 2.5% 5% 2.5% 4%;
     margin-top: 1.25%;
     margin-bottom: 1.25%;
     box-shadow: 0 0 2px 2px #52b483;
     background-color: #71e7ac;
-    transition: 1s ease;
-    transform: scale(1);
 }
 
-.photo-div:hover{
+.photo-caption{
+    font-size: 1.1em;
+    font-family: 'Nunito', sans-serif;
+    font-style: italic;
+    color: white;
+    position: absolute;
+    bottom: 2.5%;
+    text-align: center;
+    width: 80%;
+    margin-bottom: 2.5%;
+    text-shadow: 0 0 5px black;
+    text-outline: 1px black;
+}
+
+.photos-container:hover{
     transform: scale(1.05)
 }
 
@@ -57,4 +72,17 @@ h1,h2{
     height: auto;
     border-radius: 1.25%;
     box-shadow: 0 0 10px 1px #206d47;
+}
+
+.captions-btn{
+    position: absolute;
+    top: 0;
+    border: none;
+    padding: 1.5%;
+    text-shadow: 0 0 5px black;
+    font-size: 0.9em;
+    background-color: #93E9BE;
+    color: white;
+    width: 15%;
+    font-family: 'Nunito', sans-serif;
 }
