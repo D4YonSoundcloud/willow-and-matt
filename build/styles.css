@@ -30,7 +30,7 @@ h1,h2{
     justify-content: center;
     align-items: center;
     flex-flow: column;
-    background-color: #84e7b5;
+    background-color: #b7e099;
     transition: 1s ease;
     transform: scale(1);
 }
@@ -43,8 +43,7 @@ h1,h2{
     padding: 2.5% 5% 2.5% 4%;
     margin-top: 1.25%;
     margin-bottom: 1.25%;
-    box-shadow: 0 0 2px 2px #52b483;
-    background-color: #71e7ac;
+    background-color: #b7e099;
 }
 
 .photo-caption{
@@ -81,7 +80,7 @@ h1,h2{
     padding: 1.5%;
     text-shadow: 0 0 5px black;
     font-size: 0.9em;
-    background-color: #93E9BE;
+    background-color: #b7e099;
     color: white;
     width: 17%;
     font-family: 'Nunito', sans-serif;
