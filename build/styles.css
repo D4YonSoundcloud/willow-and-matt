@@ -46,6 +46,22 @@ h1,h2{
     background-color: #b7e099;
 }
 
+.audio-div{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2.5% 5% 2.5% 4%;
+    margin-top: 1.25%;
+    margin-bottom: 1.25%;
+    height: 15vh;
+    width: 85%;
+    background-color: #91b17a;
+    border-radius: 1.25%;
+    box-shadow: 0 0 5px 1px #206d47;
+    z-index: 1
+}
+
 .photo-caption{
     font-size: 1.1em;
     font-family: 'Nunito', sans-serif;
@@ -86,4 +102,20 @@ h1,h2{
     color: white;
     width: 17%;
     font-family: 'Nunito', sans-serif;
+    outline: none;
+}
+
+
+.audio-btn{
+    margin-bottom: 15%;
+    border: none;
+    text-shadow: 0 0 5px black;
+    font-size: 0.9em;
+    background-color: #b7e099;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-family: 'Nunito', sans-serif;
+    outline: none;
 }
