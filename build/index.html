@@ -22,7 +22,7 @@
     body{
         overflow-y: scroll;
         overflow-x: hidden;
-        height: 6525vh;
+        height: 7000vh;
         width: 100vw;
         display: flex;
         flex-flow: column;
@@ -39,7 +39,48 @@
 </div>
 <div id="photos" class="main-photos">
     <button class="captions-btn" @click="showCaptions = !showCaptions">{{showCaptions ? 'captions off' : 'captions on'}}</button>
-    <div class="photos-container" v-for="(photo,index) in photoArray">
+    <button :class="selectedPhotos === 'all' ? 'sort-btn-active' : 'sort-btn'" @click="selectedPhotos = 'all'"> ALL </button>
+    <button :class="selectedPhotos === 2020 ? 'sort-btn-active' : 'sort-btn'" class="sort-btn" @click="selectedPhotos = 2020"> 2020 </button>
+    <button :class="selectedPhotos === 2021 ? 'sort-btn-active' : 'sort-btn'" class="sort-btn" @click="selectedPhotos = 2021"> 2021 </button>
+    <div class="photos-container" v-for="(photo,index) in photoArray" v-if="selectedPhotos === 'all'">
+        <div v-if="photo.audio === false" class="photo-div">
+            <img :alt="index" :src="photo.photo" class="photo">
+        </div>
+        <div v-if="photo.audio === true" class="audio-div">
+            <button @click="playAudio(playingAudio, photo.audioId)" class="audio-btn">
+                <svg v-if="playingAudio === false" style="width:24px;height:24px" viewBox="0 0 24 24" stroke="#206d47">
+                    <path fill="white" d="M8,5.14V19.14L19,12.14L8,5.14Z" />
+                </svg>
+                <svg v-if="playingAudio === true" style="width:24px;height:24px" stroke="#206d47" viewBox="0 0 24 24">
+                    <path fill="white" d="M14,19H18V5H14M6,19H10V5H6V19Z" />
+                </svg>
+            </button>
+            <audio :src="photo.photo" :id="photo.audioId"></audio>
+        </div>
+        <p class="photo-caption" v-if="showCaptions">
+            {{photo.caption}}
+        </p>
+    </div>
+    <div class="photos-container" v-for="(photo,index) in photoArray2020" v-if="selectedPhotos === 2020">
+        <div v-if="photo.audio === false" class="photo-div">
+            <img :alt="index" :src="photo.photo" class="photo">
+        </div>
+        <div v-if="photo.audio === true" class="audio-div">
+            <button @click="playAudio(playingAudio, photo.audioId)" class="audio-btn">
+                <svg v-if="playingAudio === false" style="width:24px;height:24px" viewBox="0 0 24 24" stroke="#206d47">
+                    <path fill="white" d="M8,5.14V19.14L19,12.14L8,5.14Z" />
+                </svg>
+                <svg v-if="playingAudio === true" style="width:24px;height:24px" stroke="#206d47" viewBox="0 0 24 24">
+                    <path fill="white" d="M14,19H18V5H14M6,19H10V5H6V19Z" />
+                </svg>
+            </button>
+            <audio :src="photo.photo" :id="photo.audioId"></audio>
+        </div>
+        <p class="photo-caption" v-if="showCaptions">
+            {{photo.caption}}
+        </p>
+    </div>
+    <div class="photos-container" v-for="(photo,index) in photoArray2021" v-if="selectedPhotos === 2021">
         <div v-if="photo.audio === false" class="photo-div">
             <img :alt="index" :src="photo.photo" class="photo">
         </div>
@@ -67,112 +108,150 @@
 		data: {
 			playingAudio: false,
 			showCaptions: true,
-			photoArray:[{photo:'./photos/picture78.jpeg', caption: 'GIMME UR FACE', audio: false,},
-				{photo:'./photos/picture79.jpeg', caption: 'our first bed picture together C,:', audio: false,},
-				{photo:'./photos/picture80.jpeg', caption: 'first family selfie :D', audio: false,},
-				{photo:'./photos/picture81.jpeg', caption: 'loving my morning with you', audio: false,},
-				{photo:'./photos/picture82.jpeg', caption: 'she bored. she out.', audio: false,},
-				{photo:'./photos/picture1.jpeg', caption: 'Alabama trip selfie :D', audio: false,},
-				{photo:'./photos/picture2.jpeg', caption: 'selfie in me moms bed??', audio: false,},
-				{photo:'./photos/picture4.jpeg', caption: 'taking Astrid to the neighborhood park C:', audio: false,},
-				{photo:'./photos/picture3.jpeg', caption: 'cute selfie in front of the gross lake :)', audio: false,},
-				{photo:'./photos/picture5.jpeg', caption: '"ok now we kiss"', audio: false,},
-				{photo:'./photos/picture9.jpeg', caption: '*kiss*', audio: false,},
-				{photo:'./photos/picture7.jpeg', caption: 'would not want to be at Destin Commons with anyone else', audio: false,},
-				{photo:'./photos/picture6.jpeg', caption: 'MWUAHHH', audio: false,},
-				{photo:'./photos/picture8.jpeg', caption: '"What is outside???? -Astrid"', audio: false,},
-				{photo:'./photos/picture10.jpeg', caption: 'ah dude', audio: false,},
-				{photo:'./photos/picture11.jpeg', caption: 'UNDER THE SEAAAA', audio: false,},
-				{photo:'./photos/picture12.jpeg', caption: '"With my new waterproof iBone, I can take underwater selfies with you!"', audio: false,},
-				{photo:'./photos/picture13.jpeg', caption: 'Escaped the sea! And entered...a Tampa??', audio: false,},
-				{photo:'./photos/picture14.jpeg', caption: 'mornings with mama', audio: false,},
-				{photo:'./photos/picture15.jpeg', caption: 'Astrid in the back looking jelous', audio: false,},
-				{photo:'./photos/picture16.jpeg', caption: '"one more"', audio: false,},
-				{photo:'./photos/picture17.jpeg', caption: 'always happy when I am with my family C:', audio: false,},
-				{photo:'./photos/picture18.jpeg', caption: 'zZzZ', audio: false,},
-				{photo:'./photos/picture19.jpeg', caption: 'woah *heart eyes emoji*', audio: false,},
-				{photo:'./photos/picture20.jpeg', caption: 'BREAD TIME', audio: false,},
-				{photo:'./photos/picture21.jpeg', caption: 'I love knowing I can always rest my head on your shoulders', audio: false,},
-				{photo:'./photos/picture22.jpeg', caption: 'morning cuddles with mama', audio: false,},
-				{photo:'./photos/picture23.jpeg', caption: 'one of my favorite selfies of us', audio: false,},
-				{photo:'./photos/picture24.jpeg', caption: 'OK KISS TIME', audio: false,},
-				{photo:'./photos/picture25.jpeg', caption: 'GOTTEEEM', audio: false,},
-				{photo:'./photos/picture26.jpeg', caption: '"I good girl plz give treat c:"', audio: false,},
-				{photo:'./photos/picture27.jpeg', caption: 'getting them teeth WHITE', audio: false,},
-				{photo:'./photos/picture28.jpeg', caption: 'Dentist Simulator 2020', audio: false,},
-				{photo:'./photos/picture29.jpeg', caption: 'my two favorite things in the whole world', audio: false,},
-				{photo:'./photos/picture30.jpeg', caption: 'WE ANIME NOW', audio: false,},
-				{photo:'./photos/picture31.jpeg', caption: 'Walk me now. Or else.', audio: false,},
-				{photo:'./photos/picture32.jpeg', caption: 'smiling mama c:', audio: false,},
-				{photo:'./photos/picture33.jpeg', caption: 'mans best friend', audio: false,},
-				{photo:'./photos/picture34.jpeg', caption: 'giving a suspiciously dude looking Willow a kiss', audio: false,},
-				{photo:'./photos/picture35.jpeg', caption: 'UR FACE IS MINE', audio: false,},
-				{photo:'./photos/picture36.jpeg', caption: 'mini-golfing c:', audio: false,},
-				{photo:'./photos/picture37.jpeg', caption: 'amazing selfie of us and my mom', audio: false,},
-				{photo:'./photos/picture38.jpeg', caption: 'I mean we got this one framed, need I say more', audio: false,},
-				{photo:'./photos/picture39.jpeg', caption: '"Draw me like one of your french girls"', audio: false,},
-				{photo:'./photos/picture40.jpeg', caption: 'Endless Happiness around you', audio: false,},
-				{photo:'./photos/picture41.jpeg', caption: 'cuddles and kisses', audio: false,},
-				{photo:'./photos/picture42.jpeg', caption: '"yeah how u like my butt huh??" - Astrid', audio: false,},
-				{photo:'./photos/picture43.jpeg', caption: 'fresh out the shower c;', audio: false,},
-				{photo:'./photos/picture44.png', caption: 'SO BEAUTIFUL :D', audio: false,},
-				{photo:'./photos/picture45.jpeg', caption: 'You have no idea how thankful I am for you baby', audio: false,},
-				{photo:'./photos/picture46.jpeg', caption: 'Pure bliss', audio: false,},
-				{photo:'./photos/picture47.jpeg', caption: 'ehehehe', audio: false,},
-				{photo:'./photos/picture48.jpeg', caption: "I can't explain how much I love mornings with you", audio: false,},
-				{photo:'./photos/picture49.jpeg', caption: 'my eyes = non-existent', audio: false,},
-				{photo:'./photos/picture50.jpeg', caption: '"I show face?"', audio: false,},
-				{photo:'./photos/picture51.jpeg', caption: '"NOOOOO I hide hehe"', audio: false,},
-				{photo:'./photos/picture52.jpeg', caption: 'morning mama selfie c:', audio: false,},
-				{photo:'./photos/picture53.png', caption: '"AIGHT NO MORE MORNING MAMA SELFIE U WALK ME NOW" - Astrid', audio: false,},
-				{photo:'./photos/picture54.png', caption: '*heart eyes emoji*', audio: false,},
-				{photo:'./photos/picture55.jpeg', caption: 'the nutcracker, I did not see any nuts cracked :(', audio: false,},
-				{photo:'./photos/picture56.jpeg', caption: 'MERRYYY CHRISTMASS', audio: false,},
-				{photo:'./photos/picture57.jpeg', caption: '"wait where u going"', audio: false,},
-				{photo:'./photos/picture58.jpeg', caption: 'there she go', audio: false,},
-				{photo:'./photos/picture59.jpeg', caption: 'going loooong mode on em', audio: false,},
-				{photo:'./photos/picture60.jpeg', caption: '"TOO MUCH LONG MODE"', audio: false,},
-				{photo:'./photos/picture61.png', caption: "she don't wanna go to work O.O", audio: false,},
-				{photo:'./photos/picture62.jpeg', caption: 'HAIRCUTS!!!!', audio: false,},
-				{photo:'./photos/picture63.jpeg', caption: '"oh my god!!! You look like kurt kobain *heart eyes emoji*"', audio: false,},
-				{photo:'./photos/picture64.jpeg', caption: '"I heard you think that ' + "'I don't fuck with no, 6 x 2'" + ' is not a fire bar"', audio: false,},
-				{photo:'./photos/picture65.jpeg', caption: 'going Luke T mode on em', audio: false,},
-				{photo:'./photos/picture66.jpeg', caption: 'a mans too happy', audio: false,},
-				{photo:'./photos/picture67.png', caption: 'mama and baby selfie C:', audio: false,},
-				{photo:'./photos/picture68.png', caption: "fuck, I'm so lucky you're mine", audio: false,},
-				{photo:'./photos/picture69.jpeg', caption: 'budget sexy bunny cosplay', audio: false,},
-				{photo:'./photos/picture70.jpeg', caption: 'I love you too ehe c:', audio: false,},
-				{photo:'./photos/picture71.jpeg', caption: 'hit em with the front flash!', audio: false,},
-				{photo:'./photos/picture72.jpeg', caption: 'mama trying to escape in the back xD', audio: false,},
-				{photo:'./photos/picture73.jpeg', caption: ':D - astrid', audio: false,},
-				{photo:'./photos/picture74.jpeg', caption: 'the most beautiful valentines date ever', audio: false,},
-				{photo:'./photos/picture75.jpeg', caption: 'that dress seriously looked so amazing on you c:', audio: false,},
-				{photo:'./photos/picture76.jpeg', caption: 'night-time cuddles with mama', audio: false,},
-				{photo:'./photos/picture77.png', caption: '"why he holding me" -Astrid', audio: false,},
-				{photo:'./photos/picture83.png', caption: 'RBT TIME :D', audio: false,},
-				{photo:'./photos/picture84.jpeg', caption: 'SURPRISE PARTY!!!', audio: false,},
-				{photo:'./photos/picture85.jpeg', caption: 'first of many fairs with you c:', audio: false,},
-				{photo:'./photos/picture86.jpeg', caption: 'about to get a smuggler ship to ourselves >:)', audio: false,},
-				{photo:'./photos/picture87.jpeg', caption: "don't let Han know about this selfie", audio: false,},
-				{photo:'./photos/picture88.jpeg', caption: 'WE LOVE POTATO LAND', audio: false,},
-				{photo:'./photos/picture89.jpeg', caption: '*boop*', audio: false,},
-				{photo:'./photos/picture90.jpeg', caption: 'aestethic polaroid lv 100', audio: false,},
-				{photo:'./photos/picture91.jpeg', caption: 'polaroid before getting disappointed by the food :D', audio: false,},
-				{photo:'./photos/picture92.jpeg', caption: "you know we had to get a selfie infront of Disney's big ball ;)", audio: false,},
-				{photo:'./recordings/birthday-recording.m4a', caption: "My on-the-spot birthday 'letter' to you c:", audio: true, audioId: 'birthday-recording'},
-				{photo:'./photos/picture93.jpeg', caption: "So beautiful C: and all mine c:<", audio: false,},
-				{photo:'./photos/picture94.jpeg', caption: "CURLED HAIR GANG", audio: false,},
-				{photo:'./photos/picture95.jpeg', caption: "SMOOCH WITH CURLED HAIR LETS GOO", audio: false,},
-				{photo:'./photos/picture96.jpeg', caption: "hehehe mama why u sit like that? c: ", audio: false,},
-				{photo:'./photos/picture97.png', caption: "my turn for cuddles with Astrid", audio: false,},
-				{photo:'./photos/picture98.jpeg', caption: "holding on for dear life", audio: false,},
-				{photo:'./photos/picture99.jpeg', caption: "Japan or NanoBlock-an?", audio: false,},
-				{photo:'./photos/picture100.jpeg', caption: "TO INFINITY AND BE-...oh you're looking the wrong way", audio: false,},
-				{photo:'./photos/picture101.jpeg', caption: "far away castle selfie", audio: false,},
-				{photo:'./photos/picture102.jpeg', caption: "Not so far away castle seflie", audio: false,},
-				{photo:'./photos/picture103.jpeg', caption: "You can ride fairies at disney? O-O", audio: false,},
-            ]
+			photoArray:[{photo:'./photos/picture78.jpeg', caption: 'GIMME UR FACE', audio: false, year: 2020,},
+				{photo:'./photos/picture79.jpeg', caption: 'our first bed picture together C,:', audio: false, year: 2020,},
+				{photo:'./photos/picture80.jpeg', caption: 'first family selfie :D', audio: false, year: 2020,},
+				{photo:'./photos/picture81.jpeg', caption: 'loving my morning with you', audio: false, year: 2020,},
+				{photo:'./photos/picture82.jpeg', caption: 'she bored. she out.', audio: false, year: 2020,},
+				{photo:'./photos/picture1.jpeg', caption: 'Alabama trip selfie :D', audio: false, year: 2020,},
+				{photo:'./photos/picture2.jpeg', caption: 'selfie in me moms bed??', audio: false, year: 2020,},
+				{photo:'./photos/picture4.jpeg', caption: 'taking Astrid to the neighborhood park C:', audio: false, year: 2020,},
+				{photo:'./photos/picture3.jpeg', caption: 'cute selfie in front of the gross lake :)', audio: false, year: 2020,},
+				{photo:'./photos/picture5.jpeg', caption: '"ok now we kiss"', audio: false, year: 2020,},
+				{photo:'./photos/picture9.jpeg', caption: '*kiss*', audio: false, year: 2020,},
+				{photo:'./photos/picture7.jpeg', caption: 'would not want to be at Destin Commons with anyone else', audio: false, year: 2020,},
+				{photo:'./photos/picture6.jpeg', caption: 'MWUAHHH', audio: false, year: 2020,},
+				{photo:'./photos/picture8.jpeg', caption: '"What is outside???? -Astrid"', audio: false, year: 2020,},
+				{photo:'./photos/picture10.jpeg', caption: 'ah dude', audio: false, year: 2020,},
+				{photo:'./photos/picture11.jpeg', caption: 'UNDER THE SEAAAA', audio: false, year: 2020,},
+				{photo:'./photos/picture12.jpeg', caption: '"With my new waterproof iBone, I can take underwater selfies with you!"', audio: false, year: 2020,},
+				{photo:'./photos/picture13.jpeg', caption: 'Escaped the sea! And entered...a Tampa??', audio: false, year: 2020,},
+				{photo:'./photos/picture14.jpeg', caption: 'mornings with mama', audio: false, year: 2020, },
+				{photo:'./photos/picture15.jpeg', caption: 'Astrid in the back looking jelous', audio: false, year: 2020,},
+				{photo:'./photos/picture16.jpeg', caption: '"one more"', audio: false, year: 2020,},
+				{photo:'./photos/picture17.jpeg', caption: 'always happy when I am with my family C:', audio: false, year: 2020,},
+				{photo:'./photos/picture18.jpeg', caption: 'zZzZ', audio: false, year: 2020,},
+				{photo:'./photos/picture19.jpeg', caption: 'woah *heart eyes emoji*', audio: false, year: 2020,},
+				{photo:'./photos/picture20.jpeg', caption: 'BREAD TIME', audio: false, year: 2020,},
+				{photo:'./photos/picture21.jpeg', caption: 'I love knowing I can always rest my head on your shoulders', audio: false, year: 2020,},
+				{photo:'./photos/picture22.jpeg', caption: 'morning cuddles with mama', audio: false, year: 2020,},
+				{photo:'./photos/picture23.jpeg', caption: 'one of my favorite selfies of us', audio: false, year: 2020,},
+				{photo:'./photos/picture24.jpeg', caption: 'OK KISS TIME', audio: false, year: 2020,},
+				{photo:'./photos/picture25.jpeg', caption: 'GOTTEEEM', audio: false, year: 2020,},
+				{photo:'./photos/picture26.jpeg', caption: '"I good girl plz give treat c:"', audio: false, year: 2020,},
+				{photo:'./photos/picture27.jpeg', caption: 'getting them teeth WHITE', audio: false, year: 2020,},
+				{photo:'./photos/picture28.jpeg', caption: 'Dentist Simulator 2020', audio: false, year: 2020,},
+				{photo:'./photos/picture29.jpeg', caption: 'my two favorite things in the whole world', audio: false, year: 2020,},
+				{photo:'./photos/picture30.jpeg', caption: 'WE ANIME NOW', audio: false, year: 2020,},
+				{photo:'./photos/picture31.jpeg', caption: 'Walk me now. Or else.', audio: false, year: 2020,},
+				{photo:'./photos/picture32.jpeg', caption: 'smiling mama c:', audio: false, year: 2020,},
+				{photo:'./photos/picture33.jpeg', caption: 'mans best friend', audio: false, year: 2020,},
+				{photo:'./photos/picture34.jpeg', caption: 'giving a suspiciously dude looking Willow a kiss', audio: false, year: 2020,},
+				{photo:'./photos/picture35.jpeg', caption: 'UR FACE IS MINE', audio: false, year: 2020,},
+				{photo:'./photos/picture36.jpeg', caption: 'mini-golfing c:', audio: false, year: 2020,},
+				{photo:'./photos/picture37.jpeg', caption: 'amazing selfie of us and my mom', audio: false, year: 2020,},
+				{photo:'./photos/picture38.jpeg', caption: 'I mean we got this one framed, need I say more', audio: false, year: 2020,},
+				{photo:'./photos/picture39.jpeg', caption: '"Draw me like one of your french girls"', audio: false, year: 2020,},
+				{photo:'./photos/picture40.jpeg', caption: 'Endless Happiness around you', audio: false, year: 2020,},
+				{photo:'./photos/picture41.jpeg', caption: 'cuddles and kisses', audio: false, year: 2020,},
+				{photo:'./photos/picture42.jpeg', caption: '"yeah how u like my butt huh??" - Astrid', audio: false, year: 2020,},
+				{photo:'./photos/picture43.jpeg', caption: 'fresh out the shower c;', audio: false, year: 2020,},
+				{photo:'./photos/picture44.png', caption: 'SO BEAUTIFUL :D', audio: false, year: 2020,},
+				{photo:'./photos/picture45.jpeg', caption: 'You have no idea how thankful I am for you baby', audio: false, year: 2020,},
+				{photo:'./photos/picture46.jpeg', caption: 'Pure bliss', audio: false, year: 2020,},
+				{photo:'./photos/picture47.jpeg', caption: 'ehehehe', audio: false, year: 2020,},
+				{photo:'./photos/picture48.jpeg', caption: "I can't explain how much I love mornings with you", audio: false, year: 2020,},
+				{photo:'./photos/picture49.jpeg', caption: 'my eyes = non-existent', audio: false, year: 2020,},
+				{photo:'./photos/picture50.jpeg', caption: '"I show face?"', audio: false, year: 2020,},
+				{photo:'./photos/picture51.jpeg', caption: '"NOOOOO I hide hehe"', audio: false, year: 2020,},
+				{photo:'./photos/picture52.jpeg', caption: 'morning mama selfie c:', audio: false, year: 2020,},
+				{photo:'./photos/picture53.png', caption: '"AIGHT NO MORE MORNING MAMA SELFIE U WALK ME NOW" - Astrid', audio: false, year: 2020,},
+				{photo:'./photos/picture54.png', caption: '*heart eyes emoji*', audio: false, year: 2020,},
+				{photo:'./photos/picture55.jpeg', caption: 'the nutcracker, I did not see any nuts cracked :(', audio: false, year: 2020,},
+				{photo:'./photos/picture56.jpeg', caption: 'MERRYYY CHRISTMASS', audio: false, year: 2020,},
+				{photo:'./photos/picture57.jpeg', caption: '"wait where u going"', audio: false, year: 2020,},
+				{photo:'./photos/picture58.jpeg', caption: 'there she go', audio: false, year: 2020,},
+				{photo:'./photos/picture59.jpeg', caption: 'going loooong mode on em', audio: false, year: 2020,},
+				{photo:'./photos/picture60.jpeg', caption: '"TOO MUCH LONG MODE"', audio: false, year: 2020,},
+				{photo:'./photos/picture61.png', caption: "she don't wanna go to work O.O", audio: false, year: 2021,},
+				{photo:'./photos/picture62.jpeg', caption: 'HAIRCUTS!!!!', audio: false, year: 2021,},
+				{photo:'./photos/picture63.jpeg', caption: '"oh my god!!! You look like kurt kobain *heart eyes emoji*"', audio: false, year: 2021,},
+				{photo:'./photos/picture64.jpeg', caption: '"I heard you think that ' + "'I don't fuck with no, 6 x 2'" + ' is not a fire bar"', audio: false, year: 2021,},
+				{photo:'./photos/picture65.jpeg', caption: 'going Luke T mode on em', audio: false, year: 2021,},
+				{photo:'./photos/picture66.jpeg', caption: 'a mans too happy', audio: false, year: 2021,},
+				{photo:'./photos/picture67.png', caption: 'mama and baby selfie C:', audio: false, year: 2021,},
+				{photo:'./photos/picture68.png', caption: "fuck, I'm so lucky you're mine", audio: false, year: 2021,},
+				{photo:'./photos/picture69.jpeg', caption: 'budget sexy bunny cosplay', audio: false, year: 2021,},
+				{photo:'./photos/picture70.jpeg', caption: 'I love you too ehe c:', audio: false, year: 2021,},
+				{photo:'./photos/picture71.jpeg', caption: 'hit em with the front flash!', audio: false, year: 2021,},
+				{photo:'./photos/picture72.jpeg', caption: 'mama trying to escape in the back xD', audio: false, year: 2021,},
+				{photo:'./photos/picture73.jpeg', caption: ':D - astrid', audio: false, year: 2021,},
+				{photo:'./photos/picture74.jpeg', caption: 'the most beautiful valentines date ever', audio: false, year: 2021,},
+				{photo:'./photos/picture75.jpeg', caption: 'that dress seriously looked so amazing on you c:', audio: false, year: 2021,},
+				{photo:'./photos/picture76.jpeg', caption: 'night-time cuddles with mama', audio: false, year: 2021,},
+				{photo:'./photos/picture77.png', caption: '"why he holding me" -Astrid', audio: false, year: 2021,},
+				{photo:'./photos/picture83.png', caption: 'RBT TIME :D', audio: false, year: 2021,},
+				{photo:'./photos/picture84.jpeg', caption: 'SURPRISE PARTY!!!', audio: false, year: 2021,},
+				{photo:'./photos/picture85.jpeg', caption: 'first of many fairs with you c:', audio: false, year: 2021,},
+				{photo:'./photos/picture86.jpeg', caption: 'about to get a smuggler ship to ourselves >:)', audio: false, year: 2021,},
+				{photo:'./photos/picture87.jpeg', caption: "don't let Han know about this selfie", audio: false, year: 2021,},
+				{photo:'./photos/picture88.jpeg', caption: 'WE LOVE POTATO LAND', audio: false, year: 2021,},
+				{photo:'./photos/picture89.jpeg', caption: '*boop*', audio: false, year: 2021,},
+				{photo:'./photos/picture90.jpeg', caption: 'aestethic polaroid lv 100', audio: false, year: 2021,},
+				{photo:'./photos/picture91.jpeg', caption: 'polaroid before getting disappointed by the food :D', audio: false, year: 2021,},
+				{photo:'./photos/picture92.jpeg', caption: "you know we had to get a selfie infront of Disney's big ball ;)", audio: false, year: 2021,},
+				{photo:'./recordings/birthday-recording.m4a', caption: "My on-the-spot birthday 'letter' to you c:", audio: true, audioId: 'birthday-recording', year: 2021,},
+				{photo:'./photos/picture93.jpeg', caption: "So beautiful C: and all mine c:<", audio: false, year: 2021,},
+				{photo:'./photos/picture94.jpeg', caption: "CURLED HAIR GANG", audio: false, year: 2021,},
+				{photo:'./photos/picture95.jpeg', caption: "SMOOCH WITH CURLED HAIR LETS GOO", audio: false, year: 2021,},
+				{photo:'./photos/picture96.jpeg', caption: "hehehe mama why u sit like that? c: ", audio: false, year: 2021,},
+				{photo:'./photos/picture97.png', caption: "my turn for cuddles with Astrid", audio: false, year: 2021,},
+				{photo:'./photos/picture98.jpeg', caption: "holding on for dear life", audio: false, year: 2021,},
+				{photo:'./photos/picture99.jpeg', caption: "Japan or NanoBlock-an?", audio: false, year: 2021,},
+				{photo:'./photos/picture100.jpeg', caption: "TO INFINITY AND BE-...oh you're looking the wrong way", audio: false, year: 2021,},
+				{photo:'./photos/picture101.jpeg', caption: "far away castle selfie", audio: false, year: 2021,},
+				{photo:'./photos/picture102.jpeg', caption: "Not so far away castle seflie", audio: false, year: 2021,},
+				{photo:'./photos/picture103.jpeg', caption: "You can ride fairies at disney? O-O", audio: false, year: 2021,},
+				{photo:'./photos/picture104.PNG', caption: "Fish-eyed Willow :D", audio: false, year: 2021},
+				{photo:'./photos/picture109.JPG', caption: "Fish-eyed Matt C:", audio: false, year: 2021},
+				{photo:'./photos/picture105.PNG', caption: "God, you look so ridiculously pretty baby, I'm so lucky", audio: false, year: 2021},
+				{photo:'./photos/picture106.jpg', caption: "one of Astrid's cutest photos c:", audio: false, year: 2021},
+				{photo:'./photos/picture107.JPG', caption: "She got my woody on up mode", audio: false, year: 2021},
+				{photo:'./photos/picture108.JPG', caption: "There's a snake in my boot!", audio: false, year: 2021},
+				{photo:'./photos/picture110.PNG', caption: "eheh ok but where that chair at? <.<", audio: false, year: 2021},
+				{photo:'./photos/picture111.JPG', caption: "Best easter anyone could ask for <3", audio: false, year: 2021},
+				{photo:'./photos/picture112.jpg', caption: "cuddly mama", audio: false, year: 2021},
+				{photo:'./photos/picture113.jpg', caption: "Here, you can use my butt as a pillow :D", audio: false, year: 2021},
+				{photo:'./photos/picture114.JPG', caption: "b'riiing b'riiing, ello?", audio: false, year: 2021},
+				{photo:'./photos/picture115.jpg', caption: "We rode the fairy! (yes i know it spelled wrong c;)", audio: false, year: 2021},
+				{photo:'./photos/picture116.jpg', caption: "Know we had to get one on main street", audio: false, year: 2021},
+				{photo:'./photos/picture117.JPG', caption: "Can you tell I was a little tired xD", audio: false, year: 2021},
+				{photo:'./photos/picture118.jpg', caption: "The Gorilla do be photo-bombing tho", audio: false, year: 2021},
+				{photo:'./photos/picture119.JPG', caption: "I'm so happy you love my family baby c:", audio: false, year: 2021},
+				{photo:'./photos/picture120.JPG', caption: "ITS THE TREE OF LIFEEEEE", audio: false, year: 2021},
+				{photo:'./photos/picture121.JPG', caption: "Know we had to get one with mom in front of it :D", audio: false, year: 2021},
+				{photo:'./photos/picture122.JPG', caption: "Me and my Mom c:", audio: false, year: 2021},
+				{photo:'./photos/picture123.jpg', caption: "I might of been sad, but this really is one of my best pics with her", audio: false, year: 2021},
+				{photo:'./photos/picture124.JPG', caption: "WE FUCKING GRADUATED!!!!!!!", audio: false, year: 2021},
+				{photo:'./photos/picture125.JPG', caption: "God I love these photos of us so, so, sooooo much", audio: false, year: 2021},
+				{photo:'./photos/picture126.JPG', caption: "Matt, Matt's Mom and Grandma Katie c:", audio: false, year: 2021},
+				{photo:'./photos/picture127.JPG', caption: "One of my favorite photos of us, your smile is so beautiful Willow", audio: false, year: 2021},
+				{photo:'./photos/picture128.JPG', caption: "You already know we had to get some with Maheen!", audio: false, year: 2021},
+            ],
+            selectedPhotos: 'all'
 		},
+        computed:{
+			photoArray2020(){
+				return this.photoArray.filter((v) => {
+	                return v.year === 2020;
+                });
+            },
+            photoArray2021(){
+	            return this.photoArray.filter((v) => {
+		            return v.year === 2021;
+	            });
+            }
+        },
 		methods:{
             playAudio(playingAudio, id){
             	if(playingAudio === false) {
@@ -185,6 +264,7 @@
             }
 		},
 		mounted(){
+			console.log(this.photoArray2020, this.photoArray2021)
 		}
 	})
 </script>

@@ -104,6 +104,30 @@ h1,h2{
     font-family: 'Nunito', sans-serif;
     outline: none;
 }
+.sort-btn{
+    border: none;
+    padding: 1.5%;
+    text-shadow: 0 0 5px black;
+    font-size: 0.9em;
+    background-color: #b7e099;
+    color: white;
+    width: 100%;
+    font-family: 'Nunito', sans-serif;
+    outline: none;
+    transition: 0.2s;
+}
+.sort-btn-active{
+    border: none;
+    padding: 1.5%;
+    text-shadow: 0 0 5px black;
+    font-size: 0.9em;
+    background-color: #8dbd67;
+    color: white;
+    width: 100%;
+    font-family: 'Nunito', sans-serif;
+    outline: none;
+    transition: 0.2s;
+}
 
 
 .audio-btn{
