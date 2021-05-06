@@ -22,7 +22,6 @@
     body{
         overflow-y: scroll;
         overflow-x: hidden;
-        height: 7000vh;
         width: 100vw;
         display: flex;
         flex-flow: column;
@@ -37,7 +36,7 @@
     <h1>willow + matt</h1>
     <h2>2-20-20</h2>
 </div>
-<div id="photos" class="main-photos">
+<div id="photos" :class="mainPhotosClass">
     <button class="captions-btn" @click="showCaptions = !showCaptions">{{showCaptions ? 'captions off' : 'captions on'}}</button>
     <button :class="selectedPhotos === 'all' ? 'sort-btn-active' : 'sort-btn'" @click="selectedPhotos = 'all'"> ALL </button>
     <button :class="selectedPhotos === 2020 ? 'sort-btn-active' : 'sort-btn'" class="sort-btn" @click="selectedPhotos = 2020"> 2020 </button>
@@ -99,7 +98,9 @@
             {{photo.caption}}
         </p>
     </div>
-    <h2>all the photos...for now ;)</h2>
+    <h2 v-if="selectedPhotos === 'all'">all of our photos...for now ;)</h2>
+    <h2 v-if="selectedPhotos === 2021">all of our 2021 photos...for now ;)</h2>
+    <h2 v-if="selectedPhotos === 2020">all of our 2020 photos c:</h2>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
 <script>
@@ -250,6 +251,15 @@
 	            return this.photoArray.filter((v) => {
 		            return v.year === 2021;
 	            });
+            },
+            mainPhotosClass(){
+				if(this.selectedPhotos === 'all'){
+					return 'main-photos'
+                } else if (this.selectedPhotos === 2020) {
+					return 'main-photos-2020'
+                } else if (this.selectedPhotos === 2021) {
+					return 'main-photos-2021'
+                }
             }
         },
 		methods:{
@@ -264,7 +274,7 @@
             }
 		},
 		mounted(){
-			console.log(this.photoArray2020, this.photoArray2021)
+			console.log(this.photoArray2020, this.photoArray2021, this.mainPhotosClass)
 		}
 	})
 </script>
